@@ -38,21 +38,27 @@ Cette application vise à fournir à l'équipe de ConstructionXpert Services un 
  - Diagramme de Classes
  - Diagramme de Cas d'Utilisation
  - Diagramme de Séquence
+   
+![Diagramme de Classes](https://github.com/THSK4U/ConstructionXpert-/blob/main/UML/Diagramme%20de%20Classes.png)
+![Diagramme de Cas d'Utilisation](https://raw.githubusercontent.com/THSK4U/ConstructionXpert-/main/UML/Diagramme%20de%20Cas%20d'Utilisation.png)
+![Diagramme de Séquence](https://raw.githubusercontent.com/THSK4U/ConstructionXpert-/main/UML/Diagramme%20de%20S%C3%A9quence.png)
+
 
 ### Maquette
 - Création des pages nécessaires en utilisant Figma.
+- 
+  ![Maquette](https://mrkzgulfup.com/uploads/171677635556151.png)
 
 ### Frontend
 - HTML pour la structure de la page.
-- CSS / Bootstrap / Tailwind pour le design et la mise en page.
-- JavaScript pour les fonctionnalités interactives et la validation des données côté client.
+- CSS / Bootstrap.
+- JavaScript.
 
 ### Backend
 - Implémenter les fonctionnalités demandées en utilisant :
  - Langage de Programmation: Java
  - Framework Web: Java EE (Servlets, JSP)
- - Base de Données: MySQL / PostgreSQL
- - JDBC API pour la communication entre l'application Java et la base de données.
+ - Base de Données: MySQL
  - Serveur d'Application: Apache Tomcat
-- Outils de Développement: Eclipse, IntelliJ IDEA, Maven
+- Outils de Développement: Eclipse, Maven
 - Système de Gestion de Versions: Git
