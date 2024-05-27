@@ -3,7 +3,7 @@
 ## ConstructionXpert Services
 Cette application vise à fournir à l'équipe de ConstructionXpert Services un outil efficace pour la planification et l'organisation des projets de construction. Elle offre une interface conviviale pour visualiser, mettre à jour et supprimer des projets, des tâches et des ressources, tout en garantissant la sécurité des données et l'intégrité du système.
 
-![Application Screenshot](url-to-application-screenshot)
+![Application Screenshot](https://maghreb.simplonline.co/_next/image?url=https%3A%2F%2Fsimplonline-v3-prod.s3.eu-west-3.amazonaws.com%2Fmedia%2Fimage%2Fjpg%2F8678865-664766cb6ff27135800827.jpg&w=1280&q=75)
 
 ## Fonctionnalités
 
