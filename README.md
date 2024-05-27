@@ -13,23 +13,17 @@ Cette application vise à fournir à l'équipe de ConstructionXpert Services un 
 - Mettre à jour les détails d'un projet existant.
 - Supprimer un projet existant.
 
-![Gestion des Projets](url-to-project-management-screenshot)
-
 ### Gestion des Tâches
 - Créer une nouvelle tâche pour un projet en spécifiant sa description, sa date de début, sa date de fin, son statut (à faire, en cours, terminé) et les ressources nécessaires.
 - Afficher la liste des tâches associées à un projet avec leurs détails.
 - Mettre à jour les détails d'une tâche existante.
 - Supprimer une tâche existante.
 
-![Gestion des Tâches](url-to-task-management-screenshot)
-
 ### Gestion des Ressources
 - Ajouter de nouvelles ressources avec leurs détails tels que le nom, le type, la quantité et les informations du fournisseur.
 - Afficher la liste des ressources disponibles avec leurs détails.
 - Mettre à jour les détails d'une ressource existante.
 - Supprimer une ressource existante.
-
-![Gestion des Ressources](url-to-resource-management-screenshot)
 
 ## Travaux à Faire
 
