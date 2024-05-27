@@ -1,11 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="metier.Ressources" %>
+<%@ page import="dao.ImTaches" %>
+<%@ page import="dao.ImRessource" %>
+<%@ page import="metier.Taches" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projets Dashboard</title>
+    <title>Ressource</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -83,8 +87,8 @@
             font-weight: 700;
             margin-left: 50px;
         }
-        p{
-        margin-bottom: 0;
+        p {
+            margin-bottom: 0;
         }
         .content {
             padding: 20px;
@@ -121,22 +125,22 @@
         tr:hover textarea {
             background-color: #f1f1f1;
         }
-        .btn{
+        .btn {
             border: 1px solid #ddd;
         }
         .button {
-         	background-color: rgba(255, 118, 41, 0.70);	
+            background-color: rgba(255, 118, 41, 0.70);
         }
         .btnPosition {
-         	position: relative;
-  			left: -85px;
-  			border-radius: 10px;
-  			transition: left 0.3s ease;
-  			border:none;
-			}
-			.button:hover{
-			background-color: rgba(255, 118, 41, 0.93);	
-			}
+            position: relative;
+            left: -85px;
+            border-radius: 10px;
+            transition: left 0.3s ease;
+            border: none;
+        }
+        .button:hover {
+            background-color: rgba(255, 118, 41, 0.93);
+        }
 
         @media (max-width: 768px) {
             main {
@@ -179,8 +183,8 @@
                 font-size: 0.70rem;
             }
             .btnPosition {
-  			left: 0;
-			}
+                left: 0;
+            }
         }
     </style>
 </head>
@@ -189,25 +193,25 @@
         <ul class="nav">
             <li class="nav-item">
                 <div class="box"></div>
-                <a class="nav-link" href="home">      
+                <a class="nav-link" href="home">
                     <img src="https://raw.githubusercontent.com/THSK4U/ConstructionXpert-/6398607f40c5d44b48dad6606b7b3779cda22829/Media/Vector.svg" alt="Home">
                 </a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item ">
                 <div class="box"></div>
-                <a class="nav-link" href="Projets">      
+                <a class="nav-link" href="Projets">
                     <img src="https://raw.githubusercontent.com/THSK4U/ConstructionXpert-/6398607f40c5d44b48dad6606b7b3779cda22829/Media/Vector%20(1).svg" alt="Projets">
                 </a>
             </li>
             <li class="nav-item">
                 <div class="box"></div>
-                <a class="nav-link" href="taches">      
+                <a class="nav-link" href="taches">
                     <img src="https://raw.githubusercontent.com/THSK4U/ConstructionXpert-/6398607f40c5d44b48dad6606b7b3779cda22829/Media/Spotted%20Patterns.svg" alt="Tâches">
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <div class="box"></div>
-                <a class="nav-link" href="#">      
+                <a class="nav-link" href="Ressources">
                     <img src="https://raw.githubusercontent.com/THSK4U/ConstructionXpert-/6398607f40c5d44b48dad6606b7b3779cda22829/Media/Vector%20(2).svg" alt="Ressources">
                 </a>
             </li>
@@ -217,9 +221,9 @@
     <main>
         <div class="head">
             <div class="navtop">
-                <p>Projets</p>
-                <button type="button" class="btn btnPosition ml-auto mr-4" data-toggle="modal" data-target="#addProjectModal">
-                    Ajouter Projet
+                <p>Ressources</p>
+                <button type="button" class="btn btnPosition ml-auto mr-4" data-toggle="modal" data-target="#addRessourcesModal">
+                    Ajouter Ressource
                 </button>
             </div>
         </div>
@@ -229,29 +233,23 @@
                     <tr>
                         <th>ID</th>
                         <th>Nom</th>
-                        <th>Description</th>
-                        <th>Date de début</th>
-                        <th>Date de fin</th>
-                        <th>Budget</th>
+                        <th>Type</th>
+                        <th>Quantité</th>
+                        <th>Fournisseur</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="projet" items="${projetsList}">
+                    <c:forEach var="Ressources" items="${RessourcesList}">
                     <tr>
-                        <td>${projet.id}</td>
-                        <td>${projet.nom}</td>
-                        <td class="description">
-                            <textarea rows="4" cols="40" disabled>${projet.description}</textarea>
-                        </td>
-                        <td>${projet.dateDebut}</td>
-                        <td>${projet.dateFin}</td>
-                        <td>${projet.budget}</td>
+                        <td>${Ressources.id}</td>
+                        <td>${Ressources.nom}</td>
+                        <td>${Ressources.type}</td>
+                        <td>${Ressources.quantite}</td>
+                        <td>${Ressources.fournisseur}</td>
                         <td>
-                            <a href="modifierProject?id=${projet.id}" style="width: 6rem;" class="bg-success badge text-wrap text-white">Edit</a>
-                            <a href="confirmationProject?id=${projet.id}" style="width: 6rem;" class="bg-danger badge text-wrap text-white">Delete</a>
-                            
-                            <a href="taches?id=${projet.id}" style="width: 6rem;" class="bg-info badge text-wrap text-white">Tâches</a>
+                            <a href="modifierProject?id=${Ressources.id}" style="width: 6rem;" class="bg-success badge text-wrap text-white">Edit</a>
+                            <a href="confirmationProject?id=${Ressources.id}" style="width: 6rem;" class="bg-danger badge text-wrap text-white">Delete</a>
                         </td>
                     </tr>
                     </c:forEach>
@@ -259,38 +257,41 @@
             </table>
         </div>
     </main>
-
-    <!-- Modal Add-->
-    <div class="modal fade" id="addProjectModal" tabindex="-1" aria-labelledby="addProjectModalLabel" aria-hidden="true">
+ <%
+            String idParam = request.getParameter("id"); 
+                int RId = Integer.parseInt(idParam);
+        %>
+    <!-- Modal Add -->
+    <div class="modal fade" id="addRessourcesModal" tabindex="-1" aria-labelledby="addRessourcesModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="addProject" method="post">
+                <form action="addRessources" method="post">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="addProjectModalLabel">Ajouter Projet</h5>
+                        <h5 class="modal-title" id="addRessourcesModalLabel">Ajouter Ressources</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
+                       	<input type="hidden" class="form-control" id="id" name="id" >
                             <label for="projectName">Nom</label>
                             <input type="text" class="form-control" id="projectName" name="nom" required>
                         </div>
                         <div class="form-group">
-                            <label for="projectDescription">Description</label>
-                            <textarea class="form-control" id="projectDescription" name="description" rows="3" required></textarea>
+                            <label for="projectType">Type</label>
+                            <input type="text" class="form-control" id="projectType" name="type" required>
                         </div>
                         <div class="form-group">
-                            <label for="startDate">Date de début</label>
-                            <input type="date" class="form-control" id="startDate" name="dateDebut" required>
+                            <label for="projectQuantite">Quantité</label>
+                            <input type="number" class="form-control" id="projectQuantite" name="quantite" required>
                         </div>
                         <div class="form-group">
-                            <label for="endDate">Date de fin</label>
-                            <input type="date" class="form-control" id="endDate" name="dateFin" required>
+                            <label for="projectFournisseur">Fournisseur</label>
+                            <input type="text" class="form-control" id="projectFournisseur" name="fournisseur" required>
                         </div>
                         <div class="form-group">
-                            <label for="budget">Budget</label>
-                            <input type="number" class="form-control" id="budget" name="budget" required>
+                            <input type="hidden" class="form-control" id="projectIdTache" name="idTache" value="<%= RId %>">
                         </div>
                     </div>
                     <div class="modal-footer">
