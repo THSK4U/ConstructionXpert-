@@ -8,21 +8,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import metier.Projets;
 import metier.Taches;
 
 public class ImTaches implements ITachesDao {
-    private Connection connexion;
-
-    public ImTaches(Connection connexion) {
-        this.connexion = connexion;
-    }
 
     @Override
     public Taches ajouter(Taches tache) {
         try {
-            String query = "INSERT INTO Taches (description, date_debut, date_fin, status, id_projet) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement statement = connexion.prepareStatement(query);
+	    	Connection connexion = SConnection.getConnection();
+            PreparedStatement statement = connexion.prepareStatement("INSERT INTO tache (description, date_debut, date_fin, status, id_projet) VALUES (?, ?, ?, ?, ?)");
             statement.setString(1, tache.getDescription());
             statement.setDate(2, new java.sql.Date(tache.getDateDebut().getTime()));
             statement.setDate(3, new java.sql.Date(tache.getDateFin().getTime()));
@@ -42,10 +36,11 @@ public class ImTaches implements ITachesDao {
         }
         return tache;
     }
-
+ 
     @Override
     public Taches modifier(Taches tache) {
 		Taches updated = new Taches();
+    	Connection connexion = SConnection.getConnection();
 
         try {
         	updated.setId(tache.getId());
@@ -54,10 +49,8 @@ public class ImTaches implements ITachesDao {
         	updated.setDateFin(tache.getDateFin());
         	updated.setStatut(tache.getStatut());
         	updated.setIdProjets(tache.getIdProjets());
-
-        	
             
-            PreparedStatement statement = connexion.prepareStatement("UPDATE Taches SET description = ?, date_debut = ?, date_fin = ?, status = ? WHERE id_tache = ?");
+            PreparedStatement statement = connexion.prepareStatement("UPDATE tache SET description = ?, date_debut = ?, date_fin = ?, status = ? WHERE id_tache = ?");
             statement.setString(1, tache.getDescription());
             statement.setDate(2, services.DateCasting.ToSqlDate(tache.getDateDebut()));
             statement.setDate(3, services.DateCasting.ToSqlDate(tache.getDateFin()));
@@ -72,8 +65,10 @@ public class ImTaches implements ITachesDao {
 
     @Override
     public Taches supprimer(int id) {
+    	Connection connexion = SConnection.getConnection();
+
         try {
-            PreparedStatement statement = connexion.prepareStatement("DELETE FROM Taches WHERE id_tache = ?");
+            PreparedStatement statement = connexion.prepareStatement("DELETE FROM tache WHERE id_tache = ?");
             statement.setInt(1, id);
             int rowsDeleted = statement.executeUpdate();
             statement.close();
@@ -99,36 +94,68 @@ public class ImTaches implements ITachesDao {
         }
         return null;
 	}
-    }
+    
 
     @Override
     public Taches getTache(int id) {
+    	Connection connexion = SConnection.getConnection();
         Taches tache = null;
         try {
-            PreparedStatement statement = connexion.prepareStatement("SELECT * FROM Taches WHERE id_tache = ?");
+            PreparedStatement statement = connexion.prepareStatement("SELECT * FROM tache WHERE id_tache = ?");
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 tache = new Taches();
                 tache.setId(resultSet.getInt("id_tache"));
                 tache.setDescription(resultSet.getString("description"));
-                tache.setDateDebut(resultSet.getDate("dateDebut"));
-                tache.setDateFin(resultSet.getDate("dateFin"));
-                tache.setStatut(resultSet.getString("statut"));
-                tache.setIdProjets(resultSet.getInt("ID_Projets"));
+                tache.setDateDebut(resultSet.getDate("date_debut"));
+                tache.setDateFin(resultSet.getDate("date_fin"));
+                tache.setStatut(resultSet.getString("status"));
+                tache.setIdProjets(resultSet.getInt("id_projet"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return tache;
     }
+    
+    @Override
+    public List<Taches> getTache(String status, int projectId) {
+        Connection connexion = SConnection.getConnection();
+        List<Taches> tachesList = new ArrayList<>();
+        try {
+            PreparedStatement statement = connexion.prepareStatement("SELECT * FROM tache WHERE status = ? AND id_projet = ?");
+            statement.setString(1, status);
+            statement.setInt(2, projectId);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Taches tache = new Taches();
+                tache.setId(resultSet.getInt("id_tache"));
+                tache.setDescription(resultSet.getString("description"));
+                tache.setDateDebut(resultSet.getDate("date_debut"));
+                tache.setDateFin(resultSet.getDate("date_fin"));
+                tache.setStatut(resultSet.getString("date_fin"));
+                tache.setIdProjets(resultSet.getInt("id_projet"));
+
+                tachesList.add(tache);
+            }
+
+            resultSet.close();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tachesList;
+    }
+    
 
     @Override
     public List<Taches> getAllTaches() {
+    	Connection connexion = SConnection.getConnection();
         List<Taches> taches = new ArrayList<>();
         try {
-	    	Connection connection = SConnection.getConnection();
-	    	PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Taches");
+	    	PreparedStatement preparedStatement = connexion.prepareStatement("SELECT * FROM tache");
             ResultSet rs = preparedStatement.executeQuery();
             
             while (rs.next()) {
