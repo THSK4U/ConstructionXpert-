@@ -1,5 +1,12 @@
 # ConstructionXpert - Application de Gestion de Projets de Construction
 
+# Part 1 : Java EE
+https://github.com/THSK4U/ConstructionXpert-
+# Part 2 Microservices
+https://github.com/THSK4U/ConstructionXpert---Microservices
+# Part 3 Angular
+https://github.com/THSK4U/ConstructionXpert-Front
+
 ## ConstructionXpert Services
 Cette application vise à fournir à l'équipe de ConstructionXpert Services un outil efficace pour la planification et l'organisation des projets de construction. Elle offre une interface conviviale pour visualiser, mettre à jour et supprimer des projets, des tâches et des ressources, tout en garantissant la sécurité des données et l'intégrité du système.
 
